@@ -2,6 +2,14 @@
   "name": "Toth Laci Lejatszo",
   "description": "Ez a bovitmeny lejatsza a Schiman 2017-es remixet. A ctrl + alt + p billentyukombinacioval indithatod el es jatszhatod le a zenet. Keszitette: sletteon, keksoskajoska",
   "version": "1.0",
+  "options_page": "options.html",
+  "content_security_policy": "script-src 'self' https://ajax.googleapis.com; object-src 'self'",
+  "content_scripts": [
+	{
+	"matches":["<all_urls>"],
+	"js": ["options.js"]
+	}
+				  ],
   "background": {
     "scripts": ["background.js"],
     "persistent": false
@@ -11,7 +19,8 @@
   },
   "permissions":
   [
-    "<all_urls>"
+    "<all_urls>",
+    "storage"
   ],
   "manifest_version": 2
 } 
