@@ -7,7 +7,7 @@ function getYTLinks() {
 // globális j-vel
 function alertLinks(){
 	 chrome.storage.sync.get("links", function (linkobj) {
-    	j = linkobj.links;
+    		j = linkobj.links;
 		console.log(linkobj);
 		alert(j);
 	});
@@ -19,11 +19,10 @@ $(function(){
 	$('#saveButton').click(function(){
 		//var links = $('#links').val();
 		var linkobj = document.getElementById("links");
-		if (linkobj){
+		if (linkobj != ""){
 			chrome.storage.sync.set({'links' : getYTLinks()}, function(){
 				alert('Linkek mentve!');
 				//alertLinks(); // <- ez kellett debugolás miatt
-				//close();
 			});
 		} else {
 			alert('Üres mező!');
