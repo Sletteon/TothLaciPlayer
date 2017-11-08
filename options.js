@@ -18,7 +18,7 @@ function alertLinks(){
 $(function(){
 	$('#saveButton').click(function(){
 		//var links = $('#links').val();
-		var linkobj = document.getElementById("links");
+		var linkobj = getYTLinks();
 		if (linkobj != ""){
 			chrome.storage.sync.set({'links' : getYTLinks()}, function(){
 				alert('Linkek mentve!');
@@ -26,6 +26,10 @@ $(function(){
 			});
 		} else {
 			alert('Üres mező!');
+		}
+		var find = linkobj.search(",");
+		if (find != -1){
+			alert("több link Mentve")
 		}
 		
 	})
