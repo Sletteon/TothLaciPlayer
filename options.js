@@ -27,9 +27,11 @@ $(function(){
 		} else {
 			alert('Üres mező!');
 		}
-		var find = linkobj.search(",");
+		var find = linkobj.split(",");
 		if (find != -1){
-			alert("több link Mentve")
+			chrome.storage.sync.set({'links' : find}, function(){
+			alert("Több link mentve");
+			});
 		}
 		
 	})
