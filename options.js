@@ -14,25 +14,32 @@ function alertLinks(){
 }
 // Örök listener, ha a saveButton id-jű gombot lenyomják,
 // ellenőrizze a beírt szöveget, ha az nem semmi (szó szerint),
-// akkor mentse el a varázslatos chrome felhőbe 
+// akkor mentse el a varázslatos chrome felhőbe.
+
+// Csináljon substringeket (amelyeket arrayként lehet majd elérni),
+// és ha a felhasználó több linket adott meg, mint 1, azt írja ki, hogy Több link mentve.
+// Külömben: Link mentve
 $(function(){
 	$('#saveButton').click(function(){
 		//var links = $('#links').val();
 		var linkobj = getYTLinks();
+		var linksubstr = linkobj.split(",");
+
 		if (linkobj != ""){
-			chrome.storage.sync.set({'links' : getYTLinks()}, function(){
-				alert('Linkek mentve!');
-				//alertLinks(); // <- ez kellett debugolás miatt
-			});
+			if (linksubstr.length > 1){
+				chrome.storage.sync.set({'links' : linksubstr}, function(){
+					alert("Több link mentve");
+				});
+			} else {
+				chrome.storage.sync.set({'links' : getYTLinks()}, function(){
+					alert('Link mentve!');
+					//alertLinks(); // <- ez kellett debugolás miatt
+				});
+			}
 		} else {
 			alert('Üres mező!');
 		}
-		var find = linkobj.split(",");
-		if (find != -1){
-			chrome.storage.sync.set({'links' : find}, function(){
-			alert("Több link mentve");
-			});
-		}
+
 		
 	})
 })
