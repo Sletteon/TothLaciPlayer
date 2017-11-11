@@ -24,12 +24,15 @@ $(function(){
 		//var links = $('#links').val();
 		var linkobj = getYTLinks();
 		var linksubstr = linkobj.split(",");
+		var next = 0;
 
 		if (linkobj != ""){
 			if (linksubstr.length > 1){
 				chrome.storage.sync.set({'links' : linksubstr}, function(){
-					alert("Több link mentve");
+					//alert("Több link mentve");
+					alert(linksubstr[next]);
 				});
+
 			} else {
 				chrome.storage.sync.set({'links' : getYTLinks()}, function(){
 					alert('Link mentve!');

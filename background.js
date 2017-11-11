@@ -1,10 +1,13 @@
 function openWebPageWithLinkInChromeStorage(){
 	chrome.storage.sync.get("links", function (linkobj) {
-		j = linkobj.links;
-		chrome.windows.create({ url: j }, function(win) {
-        		chrome.windows.update(win.id, { focused: false });
-    		});
+		var j = linkobj.links;
+		chrome.windows.create({ url: j[0] }, function(tab) {
+        		chrome.windows.update(tab.id, { focused: false });
+			});
 	});
+window.onhashchange = function(){
+	alert("change");
+}
 }
 chrome.browserAction.onClicked.addListener(function(tab) {
 	// var myAudio = new Audio();			// megalkotja az audio objektumot
@@ -13,3 +16,18 @@ chrome.browserAction.onClicked.addListener(function(tab) {
 
 	openWebPageWithLinkInChromeStorage();
 });
+function nextSong(){
+	var nextLink = j[next];
+	chrome.windows.create({url:nextLink}, function(tab){
+		chrome.windows.update(tab.id, {focused: false});
+	});
+	next +=1;
+	setInterval(function()
+	{
+		if (j[next] != window.location.href)
+		{
+			tab.close();
+			nextSong();
+		}
+	}, 100);
+}
