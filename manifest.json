@@ -6,8 +6,8 @@
   "content_security_policy": "script-src 'self' https://ajax.googleapis.com; object-src 'self'",
   "content_scripts": [
 	{
-	"matches":["<all_urls>"],
-	"js": ["options.js"]
+	"matches":["<all_urls>","http://*/*", "https://*/*"],
+  "js": ["options.js","content.js"]
 	}
 				  ],
   "background": {
@@ -22,7 +22,8 @@
   [
     "<all_urls>",
     "storage",
-    "activeTab"
+    "activeTab",
+    "tabs"
   ],
   "manifest_version": 2
 } 
